@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christening Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<style>
+  :root{
+    --sky:#EAF3FB;
+    --paper:#FFFFFF;
+    --navy:#25406B;
+    --navy-deep:#17294A;
+    --blue:#7FA8D9;
+    --blue-soft:#BFDBF7;
+    --gold:#C9A227;
+    --cloud:#F4F9FD;
+    --ink:#25304A;
+    --ink-soft:#697390;
+    --line:rgba(37,64,107,0.14);
+    --shadow:0 12px 32px rgba(23,41,74,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--sky); color:var(--ink);
+    font-family:'Jost',sans-serif; font-weight:400;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Cormorant Garamond',serif; margin:0; font-weight:600;}
+  .script{font-family:'Petit Formal Script',cursive; font-weight:400;}
+  a{color:inherit;}
+  button{font-family:inherit; cursor:pointer;}
+  .eyebrow{font-family:'Jost',sans-serif; letter-spacing:.32em; text-transform:uppercase; font-size:.66rem; color:var(--navy); font-weight:500;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 26px;}
+
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(circle at 14% 10%, rgba(127,168,217,0.18), transparent 40%),
+      radial-gradient(circle at 88% 88%, rgba(201,162,39,0.10), transparent 45%),
+      var(--sky);
+  }
+  .stars{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.5;}
+  .star{position:absolute; color:var(--gold); animation:twinkle 3.4s ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:.25; transform:scale(0.85);} 50%{opacity:.9; transform:scale(1.1);}}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:60;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 20px; background:rgba(234,243,251,0.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-name{font-family:'Cormorant Garamond',serif; font-size:1rem;}
+  #musicToggle{
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--line); background:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-size:.95rem; transition:transform .2s, box-shadow .2s;
+  }
+  #musicToggle:hover{transform:scale(1.08);}
+  #musicToggle.playing{animation:pulseRing 1.8s ease-in-out infinite;}
+  @keyframes pulseRing{0%,100%{box-shadow:0 0 0 0 rgba(127,168,217,.4);} 50%{box-shadow:0 0 0 8px rgba(127,168,217,0);}}
+
+  /* ---------- scroll-spy section nav ---------- */
+  .page-nav{
+    position:sticky; top:64px; z-index:55;
+    display:flex; gap:6px; overflow-x:auto; padding:10px 20px;
+    background:rgba(234,243,251,0.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); scrollbar-width:none;
+  }
+  .page-nav::-webkit-scrollbar{display:none;}
+  .page-btn{
+    flex:0 0 auto; padding:7px 14px; border-radius:20px; font-size:.68rem; letter-spacing:.06em; text-transform:uppercase;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink-soft); white-space:nowrap; transition:all .2s;
+    text-decoration:none;
+  }
+  .page-btn.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  /* ---------- sections ---------- */
+  section.block{ padding:70px 0; scroll-margin-top:120px; }
+  .section-head{text-align:center; margin-bottom:38px;}
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.3rem); margin-top:8px;}
+  .section-head p.sub{color:var(--ink-soft); font-size:.9rem; max-width:440px; margin:10px auto 0;}
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- HOME ---------- */
+  header.hero{padding:86px 0 20px; text-align:center;}
+  .hero-icon{width:60px; height:auto; margin:0 auto 16px; display:block;}
+  .cloud-drift{animation:drift 6s ease-in-out infinite;}
+  @keyframes drift{0%,100%{transform:translateX(0);} 50%{transform:translateX(5px);}}
+  .flame{transform-origin:50% 100%; animation:flicker 2.6s ease-in-out infinite;}
+  @keyframes flicker{
+    0%,100%{transform:scaleY(1) scaleX(1) rotate(0deg); opacity:1;}
+    25%{transform:scaleY(1.08) scaleX(.94) rotate(-2deg); opacity:.94;}
+    50%{transform:scaleY(.94) scaleX(1.05) rotate(1.5deg); opacity:1;}
+    75%{transform:scaleY(1.05) scaleX(.96) rotate(-1deg); opacity:.96;}
+  }
+  .baby-name{
+    font-family:'Petit Formal Script',cursive; font-size:clamp(2.5rem,8vw,4.4rem);
+    color:var(--navy); line-height:1.1; margin:6px 0 10px; text-align:center;
+  }
+  .hero-sub{font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-style:italic; color:var(--ink-soft); text-align:center; max-width:460px; margin:0 auto;}
+  .parents-line{text-align:center; margin-top:16px; font-size:.85rem; color:var(--ink-soft);}
+  .parents-line b{color:var(--ink); font-weight:500;}
+  .countdown{display:flex; justify-content:center; gap:12px; margin:40px auto 8px; flex-wrap:wrap;}
+  .cd-box{background:var(--paper); border:1px solid var(--line); border-radius:14px; width:78px; padding:15px 4px; box-shadow:var(--shadow); text-align:center;}
+  .cd-num{font-family:'Cormorant Garamond',serif; font-size:1.9rem; color:var(--navy); font-weight:600;}
+  .cd-label{font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); margin-top:2px;}
+  .cd-done{font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-style:italic; color:var(--navy); text-align:center; margin-top:30px;}
+  .cta-row{display:flex; justify-content:center; margin-top:40px;}
+  .cta-btn{
+    padding:13px 26px; border-radius:30px; background:var(--navy); color:#fff; border:none;
+    font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; box-shadow:var(--shadow);
+    transition:background .2s, transform .15s; text-decoration:none; display:inline-block;
+  }
+  .cta-btn:hover{background:var(--navy-deep); transform:translateY(-1px);}
+  .hero-divider{width:1px; height:54px; background:linear-gradient(var(--blue), transparent); margin:52px auto 0;}
+
+  /* ---------- WELCOME ---------- */
+  .welcome-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow);
+    padding:36px 30px; text-align:center; max-width:520px; margin:0 auto;
+  }
+  .welcome-card p{font-family:'Cormorant Garamond',serif; font-size:1.25rem; line-height:1.6; color:var(--ink); font-style:italic;}
+  .welcome-sign{margin-top:20px; font-family:'Petit Formal Script',cursive; font-size:1.5rem; color:var(--navy);}
+
+  /* ---------- GODPARENTS ---------- */
+  .godparents-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  @media (max-width:560px){.godparents-grid{grid-template-columns:1fr;}}
+  .gp-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:16px 18px;
+    display:flex; align-items:center; gap:12px; box-shadow:var(--shadow);
+  }
+  .gp-avatar{
+    width:38px; height:38px; border-radius:50%; background:var(--blue-soft); color:var(--navy);
+    display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-weight:600; flex-shrink:0;
+  }
+  .gp-role{font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  .gp-name{font-size:.95rem; margin-top:2px;}
+
+  /* ---------- EVENT DETAILS ---------- */
+  .details-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  @media (max-width:600px){.details-grid{grid-template-columns:1fr;}}
+  .detail-card{background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:28px 26px; box-shadow:var(--shadow);}
+  .detail-card .tag{font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600;}
+  .detail-card h3{font-size:1.4rem; margin:8px 0 12px;}
+  .detail-row{display:flex; gap:9px; font-size:.86rem; color:var(--ink-soft); margin-bottom:8px; align-items:flex-start;}
+  .detail-row svg{flex-shrink:0; margin-top:2px;}
+  .map-btn{display:inline-block; margin-top:12px; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase; color:var(--navy); text-decoration:none; border-bottom:1px solid var(--navy); padding-bottom:2px;}
+
+  /* ---------- DRESS CODE ---------- */
+  .dresscode-card{background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); padding:32px 28px; text-align:center; max-width:520px; margin:0 auto;}
+  .swatches{display:flex; justify-content:center; gap:14px; margin:22px 0 10px; flex-wrap:wrap;}
+  .swatch{width:52px; height:52px; border-radius:50%; box-shadow:0 4px 10px rgba(0,0,0,0.12); border:3px solid #fff;}
+  .dresscode-card p{color:var(--ink-soft); font-size:.9rem; line-height:1.6;}
+
+  /* ---------- GIFT GUIDE ---------- */
+  .gift-card{background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); padding:32px 28px; text-align:center; max-width:520px; margin:0 auto;}
+  .gift-icon{font-size:2rem; margin-bottom:10px;}
+  .gift-card p{color:var(--ink-soft); font-size:.92rem; line-height:1.7;}
+  .gift-bank{margin-top:18px; padding:14px; background:var(--cloud); border-radius:12px; font-size:.84rem; color:var(--ink); border:1px dashed var(--blue);}
+
+  /* ---------- REMINDERS ---------- */
+  .reminders-list{max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:12px;}
+  .reminder-item{display:flex; gap:12px; align-items:flex-start; background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:14px 16px; box-shadow:var(--shadow); font-size:.88rem; color:var(--ink);}
+  .reminder-item .ic{font-size:1.1rem; flex-shrink:0;}
+
+  /* ---------- MASONRY GALLERY (baby's photos) ---------- */
+  .masonry-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:90px;
+    gap:10px;
+    grid-auto-flow:dense;
+  }
+  .masonry-grid a{ display:block; border-radius:12px; overflow:hidden; }
+  .masonry-grid img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease;}
+  .masonry-grid a:hover img{transform:scale(1.04);}
+  .m-xl{ grid-column:span 2; grid-row:span 4; }
+  .m-lg{ grid-column:span 2; grid-row:span 3; }
+  .m-md{ grid-column:span 2; grid-row:span 2; }
+  .m-sm{ grid-column:span 1; grid-row:span 2; }
+  @media (max-width:640px){
+    .masonry-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:80px;}
+    .m-xl{grid-column:span 2; grid-row:span 3;}
+    .m-lg{grid-column:span 2; grid-row:span 2;}
+    .m-md{grid-column:span 1; grid-row:span 2;}
+    .m-sm{grid-column:span 1; grid-row:span 1;}
+  }
+  /* plain grid used for guest-shared photos (uniform tiles) */
+  .gallery-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media (max-width:600px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+  .gallery-grid img{width:100%; height:100%; object-fit:cover; border-radius:10px; aspect-ratio:1/1; display:block; transition:transform .4s ease;}
+  .gallery-grid a:hover img{transform:scale(1.03);}
+  .gallery-empty{text-align:center; color:var(--ink-soft); font-style:italic; font-family:'Cormorant Garamond',serif; font-size:1.05rem; padding:26px; border:1px dashed var(--line); border-radius:14px;}
+
+  /* ---------- RSVP ---------- */
+  .rsvp-card{background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); padding:36px 30px; max-width:500px; margin:0 auto;}
+  .field{margin-bottom:17px;}
+  .field label{display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px;}
+  .field input, .field textarea, .field select{
+    width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; background:var(--cloud);
+    font-family:'Jost',sans-serif; font-size:.9rem; color:var(--ink); transition:border-color .2s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{outline:none; border-color:var(--blue);}
+  .field textarea{resize:vertical; min-height:66px;}
+  .radio-row{display:flex; gap:10px;}
+  .radio-opt{flex:1; text-align:center; padding:10px; border:1px solid var(--line); border-radius:10px; font-size:.8rem; color:var(--ink-soft); cursor:pointer; transition:all .2s;}
+  .radio-opt input{display:none;}
+  .radio-opt.active{border-color:var(--navy); background:rgba(127,168,217,0.16); color:var(--navy); font-weight:500;}
+  .btn-primary{width:100%; padding:13px; border:none; border-radius:10px; background:var(--navy); color:#fff; font-size:.83rem; letter-spacing:.08em; text-transform:uppercase; transition:background .2s, transform .15s;}
+  .btn-primary:hover{background:var(--navy-deep);}
+  .btn-primary:active{transform:scale(.98);}
+  .rsvp-msg{text-align:center; padding:16px; display:none;}
+  .rsvp-msg.show{display:block;}
+  .dove{font-size:2rem; display:inline-block; animation:fly 1.6s ease-in-out infinite;}
+  @keyframes fly{0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-8px) rotate(-4deg);}}
+
+  /* ---------- UPLOAD ---------- */
+  .upload-zone{border:1.5px dashed var(--blue); border-radius:18px; padding:34px 20px; text-align:center; background:rgba(127,168,217,0.08); cursor:pointer; transition:background .2s, border-color .2s; max-width:500px; margin:0 auto 26px;}
+  .upload-zone:hover, .upload-zone.drag{background:rgba(127,168,217,0.16); border-color:var(--navy);}
+  .upload-zone p{margin:10px 0 0; color:var(--ink-soft); font-size:.84rem;}
+  .upload-icon{font-size:1.8rem;}
+  #guestFileInput{display:none;}
+  #uploaderNameWrap{max-width:500px; margin:0 auto 14px;}
+  .upload-status{text-align:center; font-size:.8rem; color:var(--navy); min-height:18px; margin-top:6px;}
+  .photo-count-note{text-align:center; font-size:.7rem; color:var(--ink-soft); margin-top:-6px; margin-bottom:22px;}
+
+  footer{text-align:center; padding:44px 26px 30px; color:var(--ink-soft); font-size:.76rem;}
+  footer .script{font-size:1.25rem; color:var(--navy); display:block; margin-bottom:8px;}
+  #adminLink{display:inline-block; margin-top:14px; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--line); text-decoration:none; opacity:.6;}
+  #adminLink:hover{opacity:1; color:var(--ink-soft);}
+
+  .confetti-piece{position:fixed; top:-10px; z-index:200; pointer-events:none; border-radius:2px; animation:confettiFall linear forwards;}
+  @keyframes confettiFall{to{transform:translateY(105vh) rotate(540deg); opacity:.8;}}
+
+  .modal-overlay{position:fixed; inset:0; background:rgba(23,41,74,0.6); z-index:300; display:none; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(3px);}
+  .modal-overlay.show{display:flex;}
+  .modal-box{background:var(--paper); border-radius:20px; max-width:660px; width:100%; max-height:86vh; overflow-y:auto; padding:30px 28px; box-shadow:0 24px 60px rgba(0,0,0,0.3); position:relative;}
+  .modal-close{position:absolute; top:16px; right:18px; background:none; border:none; font-size:1.3rem; color:var(--ink-soft);}
+  .db-badge{display:inline-flex; align-items:center; gap:6px; font-size:.66rem; letter-spacing:.06em; text-transform:uppercase; color:var(--navy); background:var(--blue-soft); padding:5px 11px; border-radius:20px; margin-bottom:14px;}
+  .db-dot{width:7px; height:7px; border-radius:50%; background:#2E9E5B; animation:pulseDot 1.6s ease-in-out infinite;}
+  @keyframes pulseDot{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .admin-tabs{display:flex; gap:6px; margin:6px 0 22px; flex-wrap:wrap;}
+  .admin-tab{padding:7px 12px; border-radius:20px; font-size:.68rem; letter-spacing:.03em; text-transform:uppercase; border:1px solid var(--line); color:var(--ink-soft); background:var(--cloud);}
+  .admin-tab.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+  .admin-panel{display:none;}
+  .admin-panel.active{display:block;}
+  .admin-row{display:flex; gap:10px; margin-bottom:10px;}
+  .admin-row .field{flex:1; margin-bottom:0;}
+  .rsvp-list-item, .photo-list-item, .list-item{border:1px solid var(--line); border-radius:12px; padding:10px 14px; margin-bottom:8px; font-size:.82rem; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+  .rsvp-list-item .meta{color:var(--ink-soft); font-size:.7rem;}
+  .small-btn{font-size:.66rem; padding:5px 10px; border-radius:8px; border:1px solid var(--line); background:var(--cloud); color:var(--ink-soft);}
+  .small-btn:hover{background:var(--blue); color:#fff; border-color:var(--blue);}
+  .admin-gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px;}
+  .admin-gallery-grid div{position:relative;}
+  .admin-gallery-grid img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;}
+  .admin-gallery-grid button{position:absolute; top:2px; right:2px; width:20px; height:20px; border-radius:50%; background:rgba(0,0,0,0.55); color:#fff; border:none; font-size:.62rem; line-height:1;}
+  .stat-row{display:flex; gap:12px; margin-bottom:18px;}
+  .stat{flex:1; background:var(--cloud); border-radius:12px; padding:14px; text-align:center; border:1px solid var(--line);}
+  .stat b{display:block; font-family:'Cormorant Garamond',serif; font-size:1.5rem; color:var(--navy);}
+  .stat span{font-size:.62rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);}
+  .admin-note{font-size:.7rem; color:var(--ink-soft); margin-top:4px; line-height:1.5;}
+  .lightbox{position:fixed; inset:0; background:rgba(15,20,35,0.92); z-index:400; display:none; align-items:center; justify-content:center; padding:20px;}
+  .lightbox.show{display:flex;}
+  .lightbox img{max-width:92vw; max-height:86vh; border-radius:8px;}
+  .lightbox-close{position:absolute; top:22px; right:28px; color:#fff; font-size:1.6rem; background:none; border:none;}
+  .swatch-row-edit{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;}
+  .swatch-edit{width:36px; height:36px; border-radius:50%; border:2px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,0.15); position:relative;}
+  .swatch-edit button{position:absolute; top:-4px; right:-4px; width:16px; height:16px; border-radius:50%; background:#fff; border:1px solid var(--line); font-size:.5rem; line-height:1;}
+  .db-mono{font-family:monospace; font-size:.74rem; background:var(--cloud); padding:10px 12px; border-radius:10px; word-break:break-all; color:var(--ink-soft); max-height:140px; overflow-y:auto;}
+</style>
+</head>
+<body>
+<div class="stars" id="starsField"></div>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" onclick="closeLightbox()">&times;</button><img id="lightboxImg" src="" alt=""></div>
+
+<div class="topbar">
+  <div class="topbar-name" id="navName">Christening</div>
+  <button id="musicToggle" title="Play music">🔇</button>
+</div>
+<div class="page-nav" id="pageNav">
+  <a class="page-btn" href="#home" data-target="home">Home</a>
+  <a class="page-btn" href="#welcome" data-target="welcome">Welcome</a>
+  <a class="page-btn" href="#godparents" data-target="godparents">Godparents</a>
+  <a class="page-btn" href="#details" data-target="details">Event Details</a>
+  <a class="page-btn" href="#dresscode" data-target="dresscode">Dress Code</a>
+  <a class="page-btn" href="#gifts" data-target="gifts">Gift Guide</a>
+  <a class="page-btn" href="#reminders" data-target="reminders">Reminders</a>
+  <a class="page-btn" href="#photos" data-target="photos">Baby's Photos</a>
+  <a class="page-btn" href="#rsvp" data-target="rsvp">RSVP</a>
+  <a class="page-btn" href="#upload" data-target="upload">Upload Photos</a>
+</div>
+
+<!-- HOME -->
+<header class="hero block" id="home">
+  <div class="wrap">
+    <svg class="hero-icon" viewBox="0 0 60 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g class="flame"><path d="M30 6c0 0 10 13 10 21c0 7-4.5 11-10 11s-10-4-10-11c0-8 10-21 10-21z" fill="#C9A227"/><path d="M30 15c0 0 5 8 5 13c0 4-2.2 6-5 6s-5-2-5-6c0-5 5-13 5-13z" fill="#F5DE8E"/></g>
+      <rect x="21" y="27" width="18" height="8" rx="3" fill="#BFDBF7"/>
+      <rect x="24" y="35" width="12" height="46" rx="3" fill="#FFFFFF" stroke="#7FA8D9" stroke-width="1.4"/>
+      <g class="cloud-drift"><ellipse cx="10" cy="70" rx="9" ry="5" fill="#EAF3FB" stroke="#BFDBF7" stroke-width="1"/><ellipse cx="50" cy="60" rx="8" ry="4.5" fill="#EAF3FB" stroke="#BFDBF7" stroke-width="1"/></g>
+    </svg>
+    <div class="eyebrow">The Christening Of</div>
+    <h1 class="baby-name" id="babyNameHero">Baby Gabriel Santos</h1>
+    <p class="hero-sub" id="heroVerse">&ldquo;He chose us before the foundation of the world.&rdquo;</p>
+    <div class="parents-line" id="parentsLine">Child of <b>Mark Santos</b> and <b>Anna Santos</b></div>
+    <div class="countdown" id="countdownBoxes"></div>
+    <div class="cta-row"><a class="cta-btn" href="#rsvp">Join us &mdash; RSVP</a></div>
+    <div class="hero-divider"></div>
+  </div>
+</header>
+
+<!-- WELCOME -->
+<section class="block" id="welcome">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">A Warm Welcome</div><h2>A Little Note</h2></div>
+    <div class="welcome-card reveal">
+      <p id="welcomeMessage">Today we celebrate our son's welcome into God's family. Thank you for being part of his life since the very beginning. We're so grateful to have you with us in this prayer.</p>
+      <div class="welcome-sign" id="welcomeSign">&mdash; The Family</div>
+    </div>
+  </div>
+</section>
+
+<!-- GODPARENTS -->
+<section class="block" id="godparents">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Guides in Faith</div><h2>Godparents</h2></div>
+    <div class="godparents-grid reveal" id="godparentsGrid"></div>
+  </div>
+</section>
+
+<!-- EVENT DETAILS -->
+<section class="block" id="details">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Save The Date</div><h2>Event Details</h2></div>
+    <div class="details-grid reveal">
+      <div class="detail-card">
+        <div class="tag">Mass / Sacrament</div>
+        <h3 id="churchName">San Isidro Church</h3>
+        <div class="detail-row"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z" stroke="#7FA8D9" stroke-width="1.6"/></svg><span id="churchAddress">123 Rosas Street, Batangas City</span></div>
+        <div class="detail-row"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7FA8D9" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#7FA8D9" stroke-width="1.6"/></svg><span id="churchTime">Saturday, September 12, 2026 &middot; 9:00 AM</span></div>
+        <a class="map-btn" id="churchMapLink" href="#" target="_blank" rel="noopener">Open in Maps &rarr;</a>
+      </div>
+      <div class="detail-card">
+        <div class="tag">Reception</div>
+        <h3 id="receptionName">Garden Pavilion</h3>
+        <div class="detail-row"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z" stroke="#C9A227" stroke-width="1.6"/></svg><span id="receptionAddress">456 Bulaklak Avenue, Batangas City</span></div>
+        <div class="detail-row"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#C9A227" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#C9A227" stroke-width="1.6"/></svg><span id="receptionTime">11:00 AM &mdash; Lunch and Program</span></div>
+        <a class="map-btn" id="receptionMapLink" href="#" target="_blank" rel="noopener">Open in Maps &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRESS CODE -->
+<section class="block" id="dresscode">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">What To Wear</div><h2>Dress Code</h2></div>
+    <div class="dresscode-card reveal">
+      <div class="swatches" id="dresscodeSwatches"></div>
+      <p id="dresscodeText">We kindly invite our guests to wear soft sky-blue and navy tones. Please avoid wearing white or black. Thank you for joining the palette!</p>
+    </div>
+  </div>
+</section>
+
+<!-- GIFT GUIDE -->
+<section class="block" id="gifts">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">If You Wish To Give</div><h2>Gift Guide</h2></div>
+    <div class="gift-card reveal">
+      <div class="gift-icon">🎁</div>
+      <p id="giftMessage">Your presence is truly the greatest gift. But if you'd like to give something extra, a monetary gift toward baby's future would be most appreciated.</p>
+      <div class="gift-bank" id="giftBankBox">Bank Transfer: BDO &mdash; 0000 1234 5678 &mdash; Anna Santos</div>
+    </div>
+  </div>
+</section>
+
+<!-- REMINDERS -->
+<section class="block" id="reminders">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Before You Arrive</div><h2>A Few Reminders</h2></div>
+    <div class="reminders-list reveal" id="remindersList"></div>
+  </div>
+</section>
+
+<!-- BABY'S PHOTOS (masonry) -->
+<section class="block" id="photos">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Cherished Moments</div><h2>Baby's Photos</h2></div>
+    <div class="masonry-grid reveal" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="block" id="rsvp">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Before The Day</div><h2>Confirm Your Attendance</h2></div>
+    <div class="rsvp-card reveal">
+      <form id="rsvpForm">
+        <div class="field"><label>Full Name</label><input type="text" id="rsvpName" required placeholder="e.g. Juan Dela Cruz"></div>
+        <div class="field">
+          <label>Will you attend?</label>
+          <div class="radio-row">
+            <label class="radio-opt active" data-val="yes"><input type="radio" name="attend" value="yes" checked>Yes, I'll be there</label>
+            <label class="radio-opt" data-val="no"><input type="radio" name="attend" value="no">Sorry, can't make it</label>
+          </div>
+        </div>
+        <div class="field"><label>Number of Guests</label>
+          <select id="rsvpGuests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select>
+        </div>
+        <div class="field"><label>Message for Baby (optional)</label><textarea id="rsvpMessage" placeholder="Leave a short blessing or note..."></textarea></div>
+        <button type="submit" class="btn-primary">Send RSVP</button>
+      </form>
+      <div class="rsvp-msg" id="rsvpThanks">
+        <div class="dove">🕊️</div>
+        <h3 style="margin-top:10px;">Thank you!</h3>
+        <p style="color:var(--ink-soft); font-size:.9rem;">Your response has been received. We can't wait to celebrate this day with you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUEST UPLOAD -->
+<section class="block" id="upload">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">After The Reception</div><h2>Share Your Photos</h2>
+      <p class="sub">Upload the photos you took with Baby &mdash; every guest here will be able to see them.</p>
+    </div>
+    <div id="uploaderNameWrap" class="reveal"><div class="field"><label>Your Name</label><input type="text" id="uploaderName" placeholder="Who's uploading?"></div></div>
+    <div class="upload-zone reveal" id="uploadZone">
+      <div class="upload-icon">📷</div><p><b>Click</b> or drag your photos here</p><p style="font-size:.7rem;">JPG or PNG only</p>
+    </div>
+    <input type="file" id="guestFileInput" accept="image/*" multiple>
+    <div class="upload-status" id="uploadStatus"></div>
+    <p class="photo-count-note" id="photoCountNote"></p>
+    <div class="gallery-grid reveal" id="guestPhotoGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <span class="script">Thank you for celebrating with us</span>
+  <div id="footerNote">A christening is a reminder of grace and love.</div>
+  <a href="#" id="adminLink">Admin</a>
+</footer>
+
+<!-- ADMIN LOGIN -->
+<div class="modal-overlay" id="adminLoginModal">
+  <div class="modal-box" style="max-width:360px;">
+    <button class="modal-close" onclick="closeModal('adminLoginModal')">&times;</button>
+    <h3 style="margin-bottom:6px;">Admin Panel</h3>
+    <p style="font-size:.8rem; color:var(--ink-soft); margin-bottom:16px;">Enter the password to edit this invitation.</p>
+    <div class="field"><label>Password</label><input type="password" id="adminPasswordInput" placeholder="••••••••"></div>
+    <button class="btn-primary" onclick="tryAdminLogin()">Enter</button>
+    <p class="admin-note" id="adminLoginNote"></p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="modal-overlay" id="adminPanelModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('adminPanelModal')">&times;</button>
+    <div class="db-badge"><span class="db-dot"></span> Connected to Cloud Database &mdash; changes save automatically</div>
+    <h3>Admin Panel</h3>
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="tabDetails">Home &amp; Event</button>
+      <button class="admin-tab" data-tab="tabContent">Welcome / Godparents / Reminders</button>
+      <button class="admin-tab" data-tab="tabDress">Dress &amp; Gift</button>
+      <button class="admin-tab" data-tab="tabGallery">Gallery</button>
+      <button class="admin-tab" data-tab="tabRsvp">RSVP Database</button>
+      <button class="admin-tab" data-tab="tabPhotos">Guest Photos</button>
+      <button class="admin-tab" data-tab="tabMusic">Music &amp; Security</button>
+      <button class="admin-tab" data-tab="tabSystem">System</button>
+    </div>
+
+    <div class="admin-panel active" id="tabDetails">
+      <div class="field"><label>Baby's Name</label><input id="ed_babyName"></div>
+      <div class="field"><label>Verse / Tagline</label><input id="ed_verse"></div>
+      <div class="field"><label>Parents</label><input id="ed_parents"></div>
+      <div class="admin-row">
+        <div class="field"><label>Christening Date</label><input type="date" id="ed_date"></div>
+        <div class="field"><label>Time</label><input type="time" id="ed_time"></div>
+      </div>
+      <div class="field"><label>Church Name</label><input id="ed_churchName"></div>
+      <div class="field"><label>Church Address</label><input id="ed_churchAddress"></div>
+      <div class="field"><label>Google Maps link (Church)</label><input id="ed_churchMap"></div>
+      <div class="field"><label>Church time (display text)</label><input id="ed_churchTime"></div>
+      <div class="field"><label>Reception Venue Name</label><input id="ed_receptionName"></div>
+      <div class="field"><label>Reception Address</label><input id="ed_receptionAddress"></div>
+      <div class="field"><label>Google Maps link (Reception)</label><input id="ed_receptionMap"></div>
+      <div class="field"><label>Reception time (display text)</label><input id="ed_receptionTime"></div>
+      <div class="field"><label>Footer note</label><input id="ed_footerNote"></div>
+      <button class="btn-primary" onclick="saveEventDetails()">Save to Database</button>
+      <p class="admin-note" id="detailsSaveNote"></p>
+    </div>
+
+    <div class="admin-panel" id="tabContent">
+      <div class="field"><label>Welcome Message</label><textarea id="ed_welcomeMessage" style="min-height:90px;"></textarea></div>
+      <div class="field"><label>Signature (e.g. &mdash; The Santos Family)</label><input id="ed_welcomeSign"></div>
+      <hr style="border:none; border-top:1px solid var(--line); margin:20px 0;">
+      <label style="display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Godparents</label>
+      <div id="godparentsEditList"></div>
+      <div class="admin-row" style="margin-top:8px;">
+        <div class="field"><input id="gp_role" placeholder="Role, e.g. Godfather"></div>
+        <div class="field"><input id="gp_name" placeholder="Name"></div>
+        <button class="small-btn" onclick="addGodparent()" style="align-self:center;">Add</button>
+      </div>
+      <hr style="border:none; border-top:1px solid var(--line); margin:20px 0;">
+      <label style="display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Reminders</label>
+      <div id="remindersEditList"></div>
+      <div class="admin-row" style="margin-top:8px;">
+        <div class="field"><input id="reminder_icon" placeholder="Emoji, e.g. ⏰" style="max-width:80px;"></div>
+        <div class="field"><input id="reminder_text" placeholder="Reminder"></div>
+        <button class="small-btn" onclick="addReminder()" style="align-self:center;">Add</button>
+      </div>
+      <button class="btn-primary" style="margin-top:18px;" onclick="saveContentTab()">Save to Database</button>
+      <p class="admin-note" id="contentSaveNote"></p>
+    </div>
+
+    <div class="admin-panel" id="tabDress">
+      <label style="display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;">Dress Code Colors</label>
+      <div class="swatch-row-edit" id="swatchEditRow"></div>
+      <div class="admin-row" style="margin-top:10px;">
+        <input type="color" id="newSwatchColor" value="#7FA8D9" style="width:44px; height:38px; border:none; border-radius:8px;">
+        <button class="small-btn" onclick="addSwatch()">Add Color</button>
+      </div>
+      <div class="field" style="margin-top:14px;"><label>Dress Code Description</label><textarea id="ed_dresscodeText" style="min-height:70px;"></textarea></div>
+      <hr style="border:none; border-top:1px solid var(--line); margin:20px 0;">
+      <div class="field"><label>Gift Guide Message</label><textarea id="ed_giftMessage" style="min-height:70px;"></textarea></div>
+      <div class="field"><label>Bank / GCash Details (optional)</label><input id="ed_giftBank"></div>
+      <button class="btn-primary" onclick="saveDressGiftTab()">Save to Database</button>
+      <p class="admin-note" id="dressSaveNote"></p>
+    </div>
+
+    <div class="admin-panel" id="tabGallery">
+      <p class="admin-note">Upload as many photos of Baby as you like for the "Baby's Photos" section &mdash; they'll automatically arrange into a mixed-size mosaic layout.</p>
+      <input type="file" id="galleryFileInput" accept="image/*" multiple style="margin:10px 0;">
+      <div class="admin-gallery-grid" id="adminGalleryGrid"></div>
+    </div>
+
+    <div class="admin-panel" id="tabRsvp">
+      <div class="stat-row">
+        <div class="stat"><b id="statTotal">0</b><span>Responses</span></div>
+        <div class="stat"><b id="statYes">0</b><span>Attending</span></div>
+        <div class="stat"><b id="statGuests">0</b><span>Total Guests</span></div>
+      </div>
+      <button class="small-btn" onclick="exportRsvpCsv()">Download as CSV</button>
+      <div id="rsvpList" style="margin-top:14px;"></div>
+    </div>
+
+    <div class="admin-panel" id="tabPhotos">
+      <p class="admin-note">Photos uploaded by guests after the reception.</p>
+      <div id="adminPhotoList" style="margin-top:10px;"></div>
+    </div>
+
+    <div class="admin-panel" id="tabMusic">
+      <div class="field"><label>Music URL (hosted MP3 link, optional)</label><input id="ed_musicUrl" placeholder="https://example.com/song.mp3"></div>
+      <p class="admin-note">If left blank, a simple music-box lullaby is generated automatically in the browser &mdash; no copyright concerns.</p>
+      <button class="btn-primary" onclick="saveMusicUrl()">Save</button>
+      <hr style="border:none; border-top:1px solid var(--line); margin:24px 0;">
+      <div class="field"><label>Change Admin Password</label><input type="password" id="ed_newPassword" placeholder="New password"></div>
+      <button class="small-btn" onclick="changeAdminPassword()">Update Password</button>
+      <p class="admin-note" id="musicSaveNote"></p>
+    </div>
+
+    <div class="admin-panel" id="tabSystem">
+      <p class="admin-note" style="margin-bottom:10px;">All data (event details, RSVPs, photos) is stored in this invitation's persistent cloud database &mdash; it's not lost on refresh or browser close, and every visitor to this link sees the same data.</p>
+      <label style="display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px;">Stored Database Keys</label>
+      <div class="db-mono" id="dbKeyList">Loading...</div>
+      <button class="small-btn" style="margin-top:10px;" onclick="refreshDbKeys()">Refresh</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ STORAGE ============ */
+const SHARED = true;
+async function sget(key, fallback){ try{ const r = await window.storage.get(key, SHARED); return r ? JSON.parse(r.value) : fallback; }catch(e){ return fallback; } }
+async function sset(key, value){ try{ await window.storage.set(key, JSON.stringify(value), SHARED); }catch(e){ console.error('storage set failed', e); } }
+
+const DEFAULT_DETAILS = {
+  babyName: "Baby Gabriel Santos",
+  verse: "\u201cHe chose us before the foundation of the world.\u201d",
+  parents: "Child of <b>Mark Santos</b> and <b>Anna Santos</b>",
+  date: "2026-09-12",
+  time: "09:00",
+  churchName: "San Isidro Church",
+  churchAddress: "123 Rosas Street, Batangas City",
+  churchMap: "https://maps.google.com",
+  churchTime: "Saturday, September 12, 2026 \u00b7 9:00 AM",
+  receptionName: "Garden Pavilion",
+  receptionAddress: "456 Bulaklak Avenue, Batangas City",
+  receptionMap: "https://maps.google.com",
+  receptionTime: "11:00 AM \u2014 Lunch and Program",
+  footerNote: "A christening is a reminder of grace and love.",
+  musicUrl: "",
+  welcomeMessage: "Today we celebrate our son's welcome into God's family. Thank you for being part of his life since the very beginning. We're so grateful to have you with us in this prayer.",
+  welcomeSign: "\u2014 The Family",
+  godparents: [
+    {role:"Godfather", name:"Pedro Reyes"},
+    {role:"Godmother", name:"Liza Cruz"},
+    {role:"Godfather", name:"Carlo Dizon"},
+    {role:"Godmother", name:"Grace Ramos"}
+  ],
+  dresscodeColors: ["#7FA8D9","#BFDBF7","#25406B","#EAF3FB"],
+  dresscodeText: "We kindly invite our guests to wear soft sky-blue and navy tones. Please avoid wearing white or black. Thank you for joining the palette!",
+  giftMessage: "Your presence is truly the greatest gift. But if you'd like to give something extra, a monetary gift toward baby's future would be most appreciated.",
+  giftBank: "Bank Transfer: BDO \u2014 0000 1234 5678 \u2014 Anna Santos",
+  reminders: [
+    {icon:"⏰", text:"Please arrive 15 minutes before the mass begins."},
+    {icon:"👶", text:"Please ask a parent before giving the baby any sweets."},
+    {icon:"📵", text:"Kindly switch to silent mode inside the church."}
+  ],
+  gallery: []
+};
+
+let details = null;
+let rsvps = [];
+let guestPhotos = [];
+let adminPassword = "binyag123";
+
+async function loadAll(){
+  details = await sget('event-details', DEFAULT_DETAILS);
+  details = Object.assign({}, DEFAULT_DETAILS, details);
+  rsvps = await sget('rsvps', []);
+  guestPhotos = await sget('guest-photos', []);
+  adminPassword = await sget('admin-password', "binyag123");
+  render();
+}
+
+function render(){
+  document.getElementById('navName').textContent = details.babyName.split(' ')[0] + "'s Christening";
+  document.getElementById('babyNameHero').textContent = details.babyName;
+  document.getElementById('heroVerse').innerHTML = details.verse;
+  document.getElementById('parentsLine').innerHTML = details.parents;
+  document.getElementById('welcomeMessage').textContent = details.welcomeMessage;
+  document.getElementById('welcomeSign').textContent = details.welcomeSign;
+  document.getElementById('churchName').textContent = details.churchName;
+  document.getElementById('churchAddress').textContent = details.churchAddress;
+  document.getElementById('churchTime').textContent = details.churchTime;
+  document.getElementById('churchMapLink').href = details.churchMap;
+  document.getElementById('receptionName').textContent = details.receptionName;
+  document.getElementById('receptionAddress').textContent = details.receptionAddress;
+  document.getElementById('receptionTime').textContent = details.receptionTime;
+  document.getElementById('receptionMapLink').href = details.receptionMap;
+  document.getElementById('footerNote').textContent = details.footerNote;
+  document.getElementById('dresscodeText').textContent = details.dresscodeText;
+  document.getElementById('giftMessage').textContent = details.giftMessage;
+  document.getElementById('giftBankBox').textContent = details.giftBank;
+  renderGodparents();
+  renderSwatches();
+  renderReminders();
+  renderGallery();
+  renderGuestPhotos();
+  renderCountdown();
+}
+
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function renderGodparents(){
+  const grid = document.getElementById('godparentsGrid');
+  const list = details.godparents || [];
+  if(list.length===0){ grid.innerHTML = '<div class="gallery-empty" style="grid-column:1/-1;">Godparents will be added here soon.</div>'; return; }
+  grid.innerHTML = list.map(g => `<div class="gp-card"><div class="gp-avatar">${escapeHtml((g.name||'?').charAt(0))}</div><div><div class="gp-role">${escapeHtml(g.role)}</div><div class="gp-name">${escapeHtml(g.name)}</div></div></div>`).join('');
+}
+
+function renderSwatches(){
+  const row = document.getElementById('dresscodeSwatches');
+  row.innerHTML = (details.dresscodeColors||[]).map(c => `<div class="swatch" style="background:${c};"></div>`).join('');
+}
+
+function renderReminders(){
+  const list = document.getElementById('remindersList');
+  const items = details.reminders || [];
+  if(items.length===0){ list.innerHTML = '<div class="gallery-empty">No reminders yet.</div>'; return; }
+  list.innerHTML = items.map(r => `<div class="reminder-item"><span class="ic">${escapeHtml(r.icon||'\u2022')}</span><span>${escapeHtml(r.text)}</span></div>`).join('');
+}
+
+/* masonry size pattern for baby's photo gallery — mixes large/medium/small tiles */
+const MASONRY_PATTERN = ['m-xl','m-sm','m-sm','m-sm','m-lg','m-sm','m-sm','m-md','m-sm','m-sm','m-lg','m-sm'];
+function renderGallery(){
+  const grid = document.getElementById('galleryGrid');
+  const photos = details.gallery || [];
+  if(photos.length===0){ grid.innerHTML = '<div class="gallery-empty" style="grid-column:1/-1;">Baby\'s photos will appear here soon &mdash; check back!</div>'; return; }
+  grid.innerHTML = photos.map((p,i) => {
+    const sizeClass = MASONRY_PATTERN[i % MASONRY_PATTERN.length];
+    return `<a class="${sizeClass}" href="javascript:void(0)" onclick="openLightbox('${p}')"><img src="${p}" loading="lazy"></a>`;
+  }).join('');
+}
+
+function renderGuestPhotos(){
+  const grid = document.getElementById('guestPhotoGrid');
+  document.getElementById('photoCountNote').textContent = guestPhotos.length ? `${guestPhotos.length} photos shared by guests` : '';
+  if(guestPhotos.length===0){ grid.innerHTML = '<div class="gallery-empty" style="grid-column:1/-1;">No photos uploaded yet. Be the first!</div>'; return; }
+  grid.innerHTML = [...guestPhotos].reverse().map(p => `<a href="javascript:void(0)" onclick="openLightbox('${p.dataUrl}')"><img src="${p.dataUrl}" loading="lazy" title="${escapeHtml(p.uploader||'Guest')}"></a>`).join('');
+}
+
+/* ============ SCROLL-SPY NAV (auto-highlight + smooth scroll) ============ */
+const navLinks = document.querySelectorAll('.page-btn');
+navLinks.forEach(link=>{
+  link.addEventListener('click', (e)=>{
+    e.preventDefault();
+    document.getElementById(link.dataset.target).scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+const sectionIds = ['home','welcome','godparents','details','dresscode','gifts','reminders','photos','rsvp','upload'];
+const spyObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(l=>l.classList.remove('active'));
+      const active = document.querySelector(`.page-btn[data-target="${entry.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, {rootMargin:'-40% 0px -50% 0px', threshold:0});
+sectionIds.forEach(id=>{ const el = document.getElementById(id); if(el) spyObserver.observe(el); });
+
+/* ============ SCROLL REVEAL ============ */
+const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }); }, {threshold:0.15});
+function observeReveals(){ document.querySelectorAll('.reveal').forEach(el=>io.observe(el)); }
+
+/* ============ STARS BACKGROUND ============ */
+function buildStars(){
+  const field = document.getElementById('starsField');
+  const syms = ['✦','✧','⋆'];
+  let html = '';
+  for(let i=0;i<18;i++){
+    const top = Math.random()*100, left = Math.random()*100, delay = Math.random()*3, size = 8+Math.random()*10;
+    html += `<span class="star" style="top:${top}%; left:${left}%; font-size:${size}px; animation-delay:${delay}s;">${syms[i%3]}</span>`;
+  }
+  field.innerHTML = html;
+}
+
+/* ============ COUNTDOWN ============ */
+let countdownTimer;
+function renderCountdown(){
+  const box = document.getElementById('countdownBoxes');
+  if(countdownTimer) clearInterval(countdownTimer);
+  function tick(){
+    const target = new Date(`${details.date}T${details.time || '09:00'}:00`);
+    const diff = target - new Date();
+    if(diff <= 0){ box.innerHTML = '<div class="cd-done">Happy celebration day! 🎉</div>'; clearInterval(countdownTimer); return; }
+    const d = Math.floor(diff/86400000), h = Math.floor((diff/3600000)%24), m = Math.floor((diff/60000)%60), s = Math.floor((diff/1000)%60);
+    box.innerHTML = `
+      <div class="cd-box"><div class="cd-num">${d}</div><div class="cd-label">Days</div></div>
+      <div class="cd-box"><div class="cd-num">${h}</div><div class="cd-label">Hours</div></div>
+      <div class="cd-box"><div class="cd-num">${m}</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-box"><div class="cd-num">${s}</div><div class="cd-label">Seconds</div></div>`;
+  }
+  tick();
+  countdownTimer = setInterval(tick, 1000);
+}
+
+/* ============ LIGHTBOX ============ */
+function openLightbox(src){ document.getElementById('lightboxImg').src = src; document.getElementById('lightbox').classList.add('show'); }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('show'); }
+document.getElementById('lightbox').addEventListener('click', (e)=>{ if(e.target.id==='lightbox') closeLightbox(); });
+
+/* ============ IMAGE COMPRESSION ============ */
+function compressImage(file, maxW=900, quality=0.72){
+  return new Promise((resolve, reject)=>{
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const scale = Math.min(1, maxW/img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width*scale; canvas.height = img.height*scale;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject; img.src = e.target.result;
+    };
+    reader.onerror = reject; reader.readAsDataURL(file);
+  });
+}
+
+/* ============ RSVP ============ */
+document.querySelectorAll('.radio-opt').forEach(opt=>{
+  opt.addEventListener('click', ()=>{
+    document.querySelectorAll('.radio-opt').forEach(o=>o.classList.remove('active'));
+    opt.classList.add('active'); opt.querySelector('input').checked = true;
+  });
+});
+document.getElementById('rsvpForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('rsvpName').value.trim();
+  if(!name) return;
+  const attend = document.querySelector('input[name="attend"]:checked').value;
+  const guests = document.getElementById('rsvpGuests').value;
+  const message = document.getElementById('rsvpMessage').value.trim();
+  rsvps.push({ name, attend, guests, message, timestamp: new Date().toISOString() });
+  await sset('rsvps', rsvps);
+  document.getElementById('rsvpForm').style.display = 'none';
+  document.getElementById('rsvpThanks').classList.add('show');
+  if(attend === 'yes') launchConfetti();
+});
+function launchConfetti(){
+  const colors = ['#C9A227','#BFDBF7','#7FA8D9','#FFFFFF'];
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = Math.random()*100+'vw';
+    p.style.width = p.style.height = (6+Math.random()*6)+'px';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration = (2.5+Math.random()*2)+'s';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(), 5000);
+  }
+}
+
+/* ============ GUEST UPLOAD ============ */
+const uploadZone = document.getElementById('uploadZone');
+const guestFileInput = document.getElementById('guestFileInput');
+uploadZone.addEventListener('click', ()=>guestFileInput.click());
+uploadZone.addEventListener('dragover', (e)=>{ e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragleave', ()=>uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop', (e)=>{ e.preventDefault(); uploadZone.classList.remove('drag'); handleGuestFiles(e.dataTransfer.files); });
+guestFileInput.addEventListener('change', ()=>handleGuestFiles(guestFileInput.files));
+
+async function handleGuestFiles(fileList){
+  const status = document.getElementById('uploadStatus');
+  const uploader = document.getElementById('uploaderName').value.trim() || 'Guest';
+  const files = Array.from(fileList).filter(f=>f.type.startsWith('image/'));
+  if(files.length===0) return;
+  if(guestPhotos.length >= 80){ status.textContent = 'The guest gallery is full. Thank you for all the photos!'; return; }
+  status.textContent = `Uploading ${files.length} photo(s)...`;
+  for(const file of files){
+    try{ const dataUrl = await compressImage(file, 900, 0.7); guestPhotos.push({ dataUrl, uploader, timestamp: new Date().toISOString() }); }
+    catch(err){ console.error(err); }
+  }
+  await sset('guest-photos', guestPhotos);
+  status.textContent = 'Thank you! Your photo has been shared. 💙';
+  renderGuestPhotos();
+  setTimeout(()=>status.textContent='', 4000);
+}
+
+/* ============ MUSIC ============ */
+let musicPlaying = false, synth, loopPart, audioEl;
+function setupHostedAudio(){ if(details.musicUrl){ audioEl = new Audio(details.musicUrl); audioEl.loop = true; } }
+async function toggleMusic(){
+  const btn = document.getElementById('musicToggle');
+  if(!musicPlaying){
+    if(details.musicUrl){ if(!audioEl) setupHostedAudio(); audioEl.play().catch(()=>{}); }
+    else { await Tone.start(); playLullaby(); }
+    musicPlaying = true; btn.textContent = '🔊'; btn.classList.add('playing');
+  }else{
+    if(audioEl) audioEl.pause();
+    if(loopPart) loopPart.stop(0);
+    Tone.Transport.stop();
+    musicPlaying = false; btn.textContent = '🔇'; btn.classList.remove('playing');
+  }
+}
+document.getElementById('musicToggle').addEventListener('click', toggleMusic);
+function playLullaby(){
+  if(synth) return;
+  synth = new Tone.Synth({ oscillator:{type:'sine'}, envelope:{attack:0.01,decay:0.3,sustain:0.15,release:0.6} }).toDestination();
+  synth.volume.value = -12;
+  const melody = [['C4','4n'],['C4','4n'],['G4','4n'],['G4','4n'],['A4','4n'],['A4','4n'],['G4','2n'],['F4','4n'],['F4','4n'],['E4','4n'],['E4','4n'],['D4','4n'],['D4','4n'],['C4','2n']];
+  let i = 0;
+  loopPart = new Tone.Loop((time)=>{ const [note,dur] = melody[i%melody.length]; synth.triggerAttackRelease(note,dur,time); i++; }, '4n');
+  Tone.Transport.bpm.value = 96; loopPart.start(0); Tone.Transport.start();
+}
+
+/* ============ ADMIN ============ */
+function openModal(id){ document.getElementById(id).classList.add('show'); }
+function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+document.getElementById('adminLink').addEventListener('click', (e)=>{
+  e.preventDefault();
+  document.getElementById('adminPasswordInput').value = '';
+  document.getElementById('adminLoginNote').textContent = '';
+  openModal('adminLoginModal');
+});
+function tryAdminLogin(){
+  const val = document.getElementById('adminPasswordInput').value;
+  if(val === adminPassword){ closeModal('adminLoginModal'); fillAdminForm(); openModal('adminPanelModal'); }
+  else{ document.getElementById('adminLoginNote').textContent = 'Incorrect password. Please try again.'; }
+}
+document.querySelectorAll('.admin-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active'); document.getElementById(tab.dataset.tab).classList.add('active');
+    if(tab.dataset.tab === 'tabRsvp') renderAdminRsvp();
+    if(tab.dataset.tab === 'tabPhotos') renderAdminPhotos();
+    if(tab.dataset.tab === 'tabGallery') renderAdminGallery();
+    if(tab.dataset.tab === 'tabSystem') refreshDbKeys();
+  });
+});
+
+function fillAdminForm(){
+  document.getElementById('ed_babyName').value = details.babyName;
+  document.getElementById('ed_verse').value = details.verse;
+  document.getElementById('ed_parents').value = details.parents;
+  document.getElementById('ed_date').value = details.date;
+  document.getElementById('ed_time').value = details.time;
+  document.getElementById('ed_churchName').value = details.churchName;
+  document.getElementById('ed_churchAddress').value = details.churchAddress;
+  document.getElementById('ed_churchMap').value = details.churchMap;
+  document.getElementById('ed_churchTime').value = details.churchTime;
+  document.getElementById('ed_receptionName').value = details.receptionName;
+  document.getElementById('ed_receptionAddress').value = details.receptionAddress;
+  document.getElementById('ed_receptionMap').value = details.receptionMap;
+  document.getElementById('ed_receptionTime').value = details.receptionTime;
+  document.getElementById('ed_footerNote').value = details.footerNote;
+  document.getElementById('ed_musicUrl').value = details.musicUrl || '';
+  document.getElementById('ed_welcomeMessage').value = details.welcomeMessage;
+  document.getElementById('ed_welcomeSign').value = details.welcomeSign;
+  document.getElementById('ed_dresscodeText').value = details.dresscodeText;
+  document.getElementById('ed_giftMessage').value = details.giftMessage;
+  document.getElementById('ed_giftBank').value = details.giftBank;
+  renderGodparentsEdit();
+  renderRemindersEdit();
+  renderSwatchEdit();
+}
+
+async function saveEventDetails(){
+  details.babyName = document.getElementById('ed_babyName').value.trim() || details.babyName;
+  details.verse = document.getElementById('ed_verse').value.trim();
+  details.parents = document.getElementById('ed_parents').value.trim();
+  details.date = document.getElementById('ed_date').value || details.date;
+  details.time = document.getElementById('ed_time').value || details.time;
+  details.churchName = document.getElementById('ed_churchName').value.trim();
+  details.churchAddress = document.getElementById('ed_churchAddress').value.trim();
+  details.churchMap = document.getElementById('ed_churchMap').value.trim();
+  details.churchTime = document.getElementById('ed_churchTime').value.trim();
+  details.receptionName = document.getElementById('ed_receptionName').value.trim();
+  details.receptionAddress = document.getElementById('ed_receptionAddress').value.trim();
+  details.receptionMap = document.getElementById('ed_receptionMap').value.trim();
+  details.receptionTime = document.getElementById('ed_receptionTime').value.trim();
+  details.footerNote = document.getElementById('ed_footerNote').value.trim();
+  await sset('event-details', details);
+  render();
+  const note = document.getElementById('detailsSaveNote');
+  note.textContent = 'Saved to database! The whole invitation has been updated.';
+  setTimeout(()=>note.textContent='', 3000);
+}
+
+/* godparents editor */
+function renderGodparentsEdit(){
+  const wrap = document.getElementById('godparentsEditList');
+  wrap.innerHTML = (details.godparents||[]).map((g,i)=>`<div class="list-item"><span>${escapeHtml(g.role)} &mdash; ${escapeHtml(g.name)}</span><button class="small-btn" onclick="removeGodparent(${i})">Remove</button></div>`).join('') || '<p class="admin-note">None added yet.</p>';
+}
+function addGodparent(){
+  const role = document.getElementById('gp_role').value.trim();
+  const name = document.getElementById('gp_name').value.trim();
+  if(!role || !name) return;
+  details.godparents = details.godparents || [];
+  details.godparents.push({role, name});
+  document.getElementById('gp_role').value = ''; document.getElementById('gp_name').value = '';
+  renderGodparentsEdit();
+}
+function removeGodparent(i){ details.godparents.splice(i,1); renderGodparentsEdit(); }
+
+/* reminders editor */
+function renderRemindersEdit(){
+  const wrap = document.getElementById('remindersEditList');
+  wrap.innerHTML = (details.reminders||[]).map((r,i)=>`<div class="list-item"><span>${escapeHtml(r.icon)} ${escapeHtml(r.text)}</span><button class="small-btn" onclick="removeReminder(${i})">Remove</button></div>`).join('') || '<p class="admin-note">No reminders yet.</p>';
+}
+function addReminder(){
+  const icon = document.getElementById('reminder_icon').value.trim() || '\u2022';
+  const text = document.getElementById('reminder_text').value.trim();
+  if(!text) return;
+  details.reminders = details.reminders || [];
+  details.reminders.push({icon, text});
+  document.getElementById('reminder_icon').value = ''; document.getElementById('reminder_text').value = '';
+  renderRemindersEdit();
+}
+function removeReminder(i){ details.reminders.splice(i,1); renderRemindersEdit(); }
+
+async function saveContentTab(){
+  details.welcomeMessage = document.getElementById('ed_welcomeMessage').value.trim();
+  details.welcomeSign = document.getElementById('ed_welcomeSign').value.trim();
+  await sset('event-details', details);
+  render();
+  const note = document.getElementById('contentSaveNote');
+  note.textContent = 'Saved to database!';
+  setTimeout(()=>note.textContent='', 3000);
+}
+
+/* dress code swatches editor */
+function renderSwatchEdit(){
+  const row = document.getElementById('swatchEditRow');
+  row.innerHTML = (details.dresscodeColors||[]).map((c,i)=>`<div class="swatch-edit" style="background:${c};"><button onclick="removeSwatch(${i})">&times;</button></div>`).join('');
+}
+function addSwatch(){
+  const val = document.getElementById('newSwatchColor').value;
+  details.dresscodeColors = details.dresscodeColors || [];
+  details.dresscodeColors.push(val);
+  renderSwatchEdit();
+}
+function removeSwatch(i){ details.dresscodeColors.splice(i,1); renderSwatchEdit(); }
+
+async function saveDressGiftTab(){
+  details.dresscodeText = document.getElementById('ed_dresscodeText').value.trim();
+  details.giftMessage = document.getElementById('ed_giftMessage').value.trim();
+  details.giftBank = document.getElementById('ed_giftBank').value.trim();
+  await sset('event-details', details);
+  render();
+  const note = document.getElementById('dressSaveNote');
+  note.textContent = 'Saved to database!';
+  setTimeout(()=>note.textContent='', 3000);
+}
+
+async function saveMusicUrl(){
+  details.musicUrl = document.getElementById('ed_musicUrl').value.trim();
+  await sset('event-details', details);
+  audioEl = null;
+  const note = document.getElementById('musicSaveNote');
+  note.textContent = 'Music setting saved to database.';
+  setTimeout(()=>note.textContent='', 3000);
+}
+async function changeAdminPassword(){
+  const val = document.getElementById('ed_newPassword').value.trim();
+  if(val.length < 4){ document.getElementById('musicSaveNote').textContent = 'Password must be at least 4 characters.'; return; }
+  adminPassword = val;
+  await sset('admin-password', adminPassword);
+  document.getElementById('ed_newPassword').value = '';
+  document.getElementById('musicSaveNote').textContent = 'Password updated.';
+  setTimeout(()=>document.getElementById('musicSaveNote').textContent='', 3000);
+}
+
+/* gallery admin (baby's photos, supports many uploads at once) */
+document.getElementById('galleryFileInput').addEventListener('change', async (e)=>{
+  const files = Array.from(e.target.files).filter(f=>f.type.startsWith('image/'));
+  for(const file of files){
+    try{ const dataUrl = await compressImage(file, 1100, 0.75); details.gallery = details.gallery || []; details.gallery.push(dataUrl); }
+    catch(err){ console.error(err); }
+  }
+  await sset('event-details', details);
+  render(); renderAdminGallery();
+  e.target.value = '';
+});
+function renderAdminGallery(){
+  const grid = document.getElementById('adminGalleryGrid');
+  const photos = details.gallery || [];
+  grid.innerHTML = photos.map((p,i)=>`<div><img src="${p}"><button onclick="removeGalleryPhoto(${i})">&times;</button></div>`).join('');
+}
+async function removeGalleryPhoto(i){ details.gallery.splice(i,1); await sset('event-details', details); render(); renderAdminGallery(); }
+
+/* rsvp admin database */
+function renderAdminRsvp(){
+  const list = document.getElementById('rsvpList');
+  const total = rsvps.length;
+  const yes = rsvps.filter(r=>r.attend==='yes').length;
+  const guestSum = rsvps.filter(r=>r.attend==='yes').reduce((sum,r)=>{ const g = r.guests==='6+'?6:parseInt(r.guests||'1'); return sum+g; },0);
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statYes').textContent = yes;
+  document.getElementById('statGuests').textContent = guestSum;
+  if(total===0){ list.innerHTML = '<p class="admin-note">No RSVPs yet.</p>'; return; }
+  list.innerHTML = [...rsvps].reverse().map((r,idx)=>{
+    const realIdx = rsvps.length-1-idx;
+    return `<div class="rsvp-list-item"><div><div>${escapeHtml(r.name)} &mdash; ${r.attend==='yes' ? '✅ Attending ('+r.guests+')' : '❌ Not attending'}</div>${r.message?`<div class="meta">"${escapeHtml(r.message)}"</div>`:''}</div><button class="small-btn" onclick="deleteRsvp(${realIdx})">Remove</button></div>`;
+  }).join('');
+}
+async function deleteRsvp(idx){ rsvps.splice(idx,1); await sset('rsvps', rsvps); renderAdminRsvp(); }
+function exportRsvpCsv(){
+  let csv = 'Name,Attending,Guests,Message,Timestamp\n';
+  rsvps.forEach(r=>{ csv += `"${(r.name||'').replace(/"/g,'""')}","${r.attend}","${r.guests}","${(r.message||'').replace(/"/g,'""')}","${r.timestamp}"\n`; });
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'rsvp-database.csv'; a.click();
+}
+
+/* guest photos admin */
+function renderAdminPhotos(){
+  const list = document.getElementById('adminPhotoList');
+  if(guestPhotos.length===0){ list.innerHTML = '<p class="admin-note">No photos uploaded yet.</p>'; return; }
+  list.innerHTML = [...guestPhotos].reverse().map((p,idx)=>{
+    const realIdx = guestPhotos.length-1-idx;
+    return `<div class="photo-list-item"><img src="${p.dataUrl}" style="width:44px;height:44px;object-fit:cover;border-radius:6px;"><div style="flex:1; font-size:.76rem;">${escapeHtml(p.uploader||'Guest')}</div><a class="small-btn" href="${p.dataUrl}" download="christening-photo-${realIdx}.jpg">Download</a><button class="small-btn" onclick="deleteGuestPhoto(${realIdx})">Remove</button></div>`;
+  }).join('');
+}
+async function deleteGuestPhoto(idx){ guestPhotos.splice(idx,1); await sset('guest-photos', guestPhotos); renderAdminPhotos(); renderGuestPhotos(); }
+
+/* system / database keys */
+async function refreshDbKeys(){
+  const box = document.getElementById('dbKeyList');
+  try{
+    const res = await window.storage.list('', true);
+    const keys = (res && res.keys) ? res.keys : [];
+    box.textContent = keys.length ? keys.join('\n') : 'No keys stored yet.';
+  }catch(e){ box.textContent = 'Could not load the database key list.'; }
+}
+
+/* ============ INIT ============ */
+buildStars();
+loadAll().then(()=>{ observeReveals(); });
+</script>
+</body>
+</html>
